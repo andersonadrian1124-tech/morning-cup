@@ -20,7 +20,7 @@ export default function SignupPage() {
       const { error } = await supabase.auth.signUp({
         email,
         password,
-        options: { emailRedirectTo: `${process.env.NEXT_PUBLIC_APP_URL}/auth/callback` }
+        options: { emailRedirectTo: `${process.env.NEXT_PUBLIC_APP_URL}/auth/callback` },
       })
 
       if (error) {
@@ -28,7 +28,7 @@ export default function SignupPage() {
       } else {
         setDone(true)
       }
-    } catch (err) {
+    } catch {
       setError('Connection failed. Please try again.')
     } finally {
       setLoading(false)
@@ -37,30 +37,52 @@ export default function SignupPage() {
 
   if (done) {
     return (
-      <main className="min-h-screen bg-amber-50 flex items-center justify-center px-4">
-        <div className="bg-white rounded-2xl shadow-sm p-8 w-full max-w-sm text-center">
-          <div className="text-4xl mb-4">☕</div>
-          <h1 className="text-2xl font-bold text-amber-900 mb-2">Check your email</h1>
-          <p className="text-amber-700 text-sm">We sent a confirmation link to <strong>{email}</strong>. Click it to activate your account.</p>
+      <main style={{ minHeight: '100vh', background: '#0a0a0a', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '2rem', fontFamily: 'var(--font-geist-sans)' }}>
+        <div style={{ background: '#111112', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '12px', padding: '3rem 2.5rem', width: '100%', maxWidth: '420px', textAlign: 'center' }}>
+          <p style={{ color: '#f0f0f2', fontSize: '1.25rem', fontWeight: 700, marginBottom: '0.75rem' }}>Check your email</p>
+          <p style={{ color: '#888896', fontSize: '0.9rem', lineHeight: 1.7, margin: 0 }}>
+            We sent a confirmation link to <strong style={{ color: '#f0f0f2' }}>{email}</strong>.<br />
+            Click it to activate your account.
+          </p>
         </div>
       </main>
     )
   }
 
   return (
-    <main className="min-h-screen bg-amber-50 flex items-center justify-center px-4">
-      <div className="bg-white rounded-2xl shadow-sm p-8 w-full max-w-sm">
-        <h1 className="text-2xl font-bold text-amber-900 mb-2 text-center">Create your account</h1>
-        <p className="text-amber-700 text-center mb-6 text-sm">Start your free 7-day trial</p>
+    <main style={{ minHeight: '100vh', background: '#0a0a0a', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '2rem', fontFamily: 'var(--font-geist-sans)' }}>
+      <div style={{ background: '#111112', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '12px', padding: '3rem 2.5rem', width: '100%', maxWidth: '420px' }}>
 
-        <form onSubmit={handleSignup} className="flex flex-col gap-4">
+        <a href="/" style={{ display: 'block', textAlign: 'center', textDecoration: 'none', marginBottom: '2rem' }}>
+          <span style={{ fontSize: '1.3rem', fontWeight: 800, color: '#f0f0f2', letterSpacing: '-0.02em' }}>Morning Cup</span>
+        </a>
+
+        <h1 style={{ fontSize: '1.5rem', fontWeight: 700, letterSpacing: '-0.03em', color: '#f0f0f2', margin: '0 0 0.4rem', textAlign: 'center' }}>
+          Create your account
+        </h1>
+        <p style={{ color: '#888896', fontSize: '0.875rem', textAlign: 'center', margin: '0 0 2rem' }}>
+          Free — no credit card required
+        </p>
+
+        <form onSubmit={handleSignup} style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
           <input
             type="email"
             placeholder="Email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
-            className="border border-amber-200 rounded-xl px-4 py-3 focus:outline-none focus:border-amber-900"
+            style={{
+              background: '#0a0a0a',
+              border: '1px solid rgba(255,255,255,0.1)',
+              borderRadius: '6px',
+              color: '#f0f0f2',
+              padding: '0.85rem 1.25rem',
+              fontSize: '0.9rem',
+              fontFamily: 'inherit',
+              width: '100%',
+              boxSizing: 'border-box',
+              outline: 'none',
+            }}
           />
           <input
             type="password"
@@ -69,23 +91,44 @@ export default function SignupPage() {
             onChange={(e) => setPassword(e.target.value)}
             required
             minLength={6}
-            className="border border-amber-200 rounded-xl px-4 py-3 focus:outline-none focus:border-amber-900"
+            style={{
+              background: '#0a0a0a',
+              border: '1px solid rgba(255,255,255,0.1)',
+              borderRadius: '6px',
+              color: '#f0f0f2',
+              padding: '0.85rem 1.25rem',
+              fontSize: '0.9rem',
+              fontFamily: 'inherit',
+              width: '100%',
+              boxSizing: 'border-box',
+              outline: 'none',
+            }}
           />
-          {error && <p className="text-red-500 text-sm">{error}</p>}
+          {error && <p style={{ color: '#f87171', fontSize: '0.82rem', margin: 0 }}>{error}</p>}
           <button
             type="submit"
             disabled={loading}
-            className="bg-amber-900 text-white py-3 rounded-xl hover:bg-amber-700 transition disabled:opacity-50"
+            style={{
+              background: '#4353FF',
+              color: '#fff',
+              border: 'none',
+              borderRadius: '6px',
+              padding: '0.85rem',
+              fontSize: '0.9rem',
+              fontWeight: 600,
+              fontFamily: 'inherit',
+              cursor: loading ? 'not-allowed' : 'pointer',
+              opacity: loading ? 0.6 : 1,
+              marginTop: '0.25rem',
+            }}
           >
-            {loading ? 'Creating account...' : 'Create account'}
+            {loading ? 'Creating account…' : 'Create free account'}
           </button>
         </form>
 
-        <p className="text-center text-sm text-amber-700 mt-4">
+        <p style={{ textAlign: 'center', fontSize: '0.82rem', color: '#888896', margin: '1.5rem 0 0' }}>
           Already have an account?{' '}
-          <a href="/login" className="font-semibold text-amber-900 underline">
-            Sign in
-          </a>
+          <a href="/login" style={{ color: '#f0f0f2', textDecoration: 'underline' }}>Sign in</a>
         </p>
       </div>
     </main>
