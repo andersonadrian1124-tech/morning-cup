@@ -22,16 +22,33 @@ export default function FetchButton() {
   }
 
   return (
-    <div className="flex items-center gap-3">
+    <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
       <button
         onClick={handleFetch}
         disabled={status === 'loading'}
-        className="text-sm bg-amber-900 text-white px-4 py-2 rounded-xl hover:bg-amber-700 transition disabled:opacity-50"
+        style={{
+          background: '#4353FF',
+          color: '#fff',
+          border: 'none',
+          borderRadius: '6px',
+          padding: '0.45rem 1rem',
+          fontSize: '0.75rem',
+          fontWeight: 600,
+          fontFamily: 'var(--font-geist-sans)',
+          cursor: status === 'loading' ? 'not-allowed' : 'pointer',
+          opacity: status === 'loading' ? 0.6 : 1,
+          transition: 'background 160ms ease-out, opacity 160ms ease-out',
+          letterSpacing: '0.01em',
+        }}
       >
-        {status === 'loading' ? 'Fetching...' : 'Fetch latest'}
+        {status === 'loading' ? 'Fetching…' : 'Fetch latest'}
       </button>
       {message && (
-        <span className={`text-sm ${status === 'error' ? 'text-red-500' : 'text-amber-600'}`}>
+        <span style={{
+          fontSize: '0.78rem',
+          fontFamily: 'var(--font-geist-mono)',
+          color: status === 'error' ? '#f87171' : '#888896',
+        }}>
           {message}
         </span>
       )}

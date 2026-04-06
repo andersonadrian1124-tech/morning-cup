@@ -21,25 +21,47 @@ export default function EmailTestButton() {
     }
   }
 
+  const ghostBtn: React.CSSProperties = {
+    background: 'transparent',
+    border: '1px solid rgba(255,255,255,0.1)',
+    borderRadius: '6px',
+    color: '#888896',
+    padding: '0.55rem 1.1rem',
+    fontSize: '0.8rem',
+    fontFamily: 'var(--font-geist-sans)',
+    cursor: 'pointer',
+    transition: 'border-color 160ms ease-out, color 160ms ease-out',
+    textDecoration: 'none',
+    display: 'inline-block',
+  }
+
   return (
-    <div className="flex items-center gap-3 flex-wrap">
+    <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', flexWrap: 'wrap' }}>
       <a
         href="/api/email-preview"
         target="_blank"
         rel="noopener noreferrer"
-        className="text-sm border border-amber-300 text-amber-800 px-4 py-2 rounded-xl hover:bg-amber-50 transition"
+        style={ghostBtn}
       >
         Preview email
       </a>
       <button
         onClick={handleSendTest}
         disabled={status === 'sending'}
-        className="text-sm border border-amber-300 text-amber-800 px-4 py-2 rounded-xl hover:bg-amber-50 transition disabled:opacity-50"
+        style={{
+          ...ghostBtn,
+          cursor: status === 'sending' ? 'not-allowed' : 'pointer',
+          opacity: status === 'sending' ? 0.6 : 1,
+        }}
       >
-        {status === 'sending' ? 'Sending...' : 'Send test to me'}
+        {status === 'sending' ? 'Sending…' : 'Send test to me'}
       </button>
       {message && (
-        <span className={`text-sm ${status === 'error' ? 'text-red-500' : 'text-amber-600'}`}>
+        <span style={{
+          fontSize: '0.78rem',
+          fontFamily: 'var(--font-geist-mono)',
+          color: status === 'error' ? '#f87171' : '#888896',
+        }}>
           {message}
         </span>
       )}

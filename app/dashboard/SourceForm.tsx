@@ -53,7 +53,7 @@ export default function SourceForm() {
         style={{
           background: 'none',
           border: 'none',
-          color: '#4a4a47',
+          color: '#555560',
           fontFamily: 'var(--font-geist-mono)',
           fontSize: '0.6rem',
           letterSpacing: '0.15em',
@@ -61,8 +61,8 @@ export default function SourceForm() {
           padding: '1rem 0 0',
           transition: 'color 160ms ease-out',
         }}
-        onMouseEnter={(e) => (e.currentTarget.style.color = '#9a9994')}
-        onMouseLeave={(e) => (e.currentTarget.style.color = '#4a4a47')}
+        onMouseEnter={(e) => (e.currentTarget.style.color = '#4353FF')}
+        onMouseLeave={(e) => (e.currentTarget.style.color = '#555560')}
       >
         + ADD A SOURCE
       </button>
@@ -79,10 +79,10 @@ export default function SourceForm() {
             type="button"
             onClick={() => setType(t.value)}
             style={{
-              background: type === t.value ? '#ddd8cf' : 'transparent',
-              color: type === t.value ? '#0c0c0b' : '#4a4a47',
+              background: type === t.value ? '#4353FF' : 'transparent',
+              color: type === t.value ? '#ffffff' : '#555560',
               border: '1px solid',
-              borderColor: type === t.value ? '#ddd8cf' : 'rgba(255,255,255,0.08)',
+              borderColor: type === t.value ? '#4353FF' : 'rgba(255,255,255,0.08)',
               padding: '0.4rem 0.9rem',
               fontSize: '0.68rem',
               letterSpacing: '0.08em',
@@ -129,8 +129,8 @@ export default function SourceForm() {
           type="submit"
           disabled={loading}
           style={{
-            background: '#ddd8cf',
-            color: '#0c0c0b',
+            background: '#4353FF',
+            color: '#ffffff',
             border: 'none',
             padding: '0.65rem 1.5rem',
             fontSize: '0.65rem',
@@ -139,10 +139,11 @@ export default function SourceForm() {
             fontFamily: 'var(--font-geist-mono)',
             cursor: loading ? 'not-allowed' : 'pointer',
             opacity: loading ? 0.5 : 1,
+            borderRadius: '4px',
             transition: 'opacity 160ms ease-out, background 160ms ease-out',
           }}
-          onMouseEnter={(e) => { if (!loading) (e.currentTarget.style.background = '#f0ece4') }}
-          onMouseLeave={(e) => { if (!loading) (e.currentTarget.style.background = '#ddd8cf') }}
+          onMouseEnter={(e) => { if (!loading) (e.currentTarget.style.background = '#5563FF') }}
+          onMouseLeave={(e) => { if (!loading) (e.currentTarget.style.background = '#4353FF') }}
         >
           {loading ? 'ADDING...' : 'ADD SOURCE'}
         </button>
@@ -152,15 +153,15 @@ export default function SourceForm() {
           style={{
             background: 'none',
             border: 'none',
-            color: '#4a4a47',
+            color: '#555560',
             fontFamily: 'var(--font-geist-mono)',
             fontSize: '0.6rem',
             letterSpacing: '0.1em',
             cursor: 'pointer',
             transition: 'color 160ms ease-out',
           }}
-          onMouseEnter={(e) => (e.currentTarget.style.color = '#9a9994')}
-          onMouseLeave={(e) => (e.currentTarget.style.color = '#4a4a47')}
+          onMouseEnter={(e) => (e.currentTarget.style.color = '#888896')}
+          onMouseLeave={(e) => (e.currentTarget.style.color = '#555560')}
         >
           CANCEL
         </button>
