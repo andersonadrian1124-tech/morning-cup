@@ -10,8 +10,11 @@ export async function addSource(formData: FormData) {
   if (!user) throw new Error('Not authenticated')
 
   const type = formData.get('type') as string
-  const url = formData.get('url') as string
+  let url = (formData.get('url') as string).trim()
   const name = formData.get('name') as string
+
+  // Normalize URL — add https:// if the user left it off
+  if (url && !/^https?:\/\//i.test(url)) url = `https://${url}`
 
   const { error } = await supabase.from('sources').insert({
     user_id: user.id,
@@ -23,6 +26,7 @@ export async function addSource(formData: FormData) {
   if (error) throw new Error(error.message)
 
   revalidatePath('/')
+  revalidatePath('/dashboard')
 }
 
 export async function deleteSource(formData: FormData) {
@@ -42,4 +46,5 @@ export async function deleteSource(formData: FormData) {
   if (error) throw new Error(error.message)
 
   revalidatePath('/')
+  revalidatePath('/dashboard')
 }
